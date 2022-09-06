@@ -71,6 +71,8 @@ let isCleaningFiles = false
 
 // MARK: end of settings the script
 
+let startDate = Date()
+
 extension String {
     var stringByRemovingWhitespaces: String {
         return components(separatedBy: .whitespacesAndNewlines).joined()
@@ -474,6 +476,7 @@ if isThrowingErrorForUnused {
 
 print("Number of warnings: \(warningsCount)")
 print("Number of errors: \(errorsCount)")
+print("Time: \(Date().timeIntervalSince(startDate)) sec.")
 
 if errorsCount > 0 {
     exit(1)
