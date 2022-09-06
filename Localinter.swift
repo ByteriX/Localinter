@@ -1,7 +1,7 @@
 #!/usr/bin/env xcrun --sdk macosx swift
 /**
  Localinter.swift
- version 1.0
+ version 1.1
  
  Created by Sergey Balalaev on 31.08.22.
  Copyright (c) 2022 ByteriX. All rights reserved.
