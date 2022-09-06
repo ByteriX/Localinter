@@ -8,6 +8,8 @@ Check localizable files for Swift
  2. Searching potentially untranslated keys from localizable files
  3. Checking duplicate keys from localizable files
  4. Checking unused keys from localizable files
+ 
+![](Screens/3.png)
 
 ## Install
 
@@ -17,6 +19,7 @@ Check localizable files for Swift
 ```bash
 ${SRCROOT}/Localinter.swift
 ```
+![](Screens/1.png)
 
 ## Setup:
 
