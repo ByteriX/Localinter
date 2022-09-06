@@ -63,6 +63,7 @@ let ignoredUntranslatedKeys: Set<String> = [
 ]
 
 let isThrowingErrorForUntranslated = true
+let isThrowingErrorForUnused = true
 let isClearWhitespasesInLocalizableFiles = false
 let isOnlyOneLanguage = false
 /// Cleaning localizable files. Will remove comments, empty lines and order your keys by alphabetical.
@@ -462,6 +463,12 @@ for file in localizableFiles {
 if isThrowingErrorForUntranslated {
     for key in untranslatedKeys {
         printError(message: "[Missing Translation] \(key) is not translated", line: 1)
+    }
+}
+
+if isThrowingErrorForUnused {
+    for key in unusedKeys {
+        printError(message: "[Unused cases] \(key) is not used from code", line: masterLocalizableFiles.linesNumbers[key])
     }
 }
 
