@@ -1,7 +1,7 @@
 #!/usr/bin/env xcrun --sdk macosx swift
 /**
  Localinter.swift
- version 1.1
+ version 1.1.1
  
  Created by Sergey Balalaev on 31.08.22.
  Copyright (c) 2022 ByteriX. All rights reserved.
@@ -47,7 +47,7 @@ let usingTypes: [UsingType] = [
 ]
 
 /**
- If you want to exclude unused keys from checking, yuo can define they this
+ If you want to exclude unused keys from checking, you can define they this
 
  Example:
   let ignoredUnusedKeys = [
@@ -93,7 +93,7 @@ for usingType in usingTypes {
     case .standart:
         searchUsingRegexPatterns.append("NSLocalized(Format)?String\\(\\s*@?\"([\\w\\.]+)\"")
     case .swiftGen(let enumName):
-        searchUsingRegexPatterns.append(enumName + #"\.((?:\.*[A-Z]{1}[A-z]*[0-9]*)*)\s*((?:\.*[a-z]{1}[A-z]*[0-9]*))"#)
+        searchUsingRegexPatterns.append(enumName + #"\s*\.((?:\.*[A-Z]{1}[A-z0-9]*)*)\s*((?:\.*[a-z]{1}[A-z0-9]*))"#)
     case .l10n:
         searchUsingRegexPatterns.append("L10n.tr\\(key: \"(\\w+)\"")
     case .localized:
