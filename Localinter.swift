@@ -6,7 +6,7 @@
  Created by Sergey Balalaev on 31.08.22.
  Copyright (c) 2022 ByteriX. All rights reserved.
  
- Script can:
+ Script allows:
  1. Checking the localizable file from masterLanguageCode and find missing keys in other localizable files
  2. Searching potentially untranslated keys from localizable files
  3. Checking duplicate keys from localizable files

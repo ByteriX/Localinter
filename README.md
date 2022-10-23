@@ -2,14 +2,21 @@
 
 Check localizable files for Swift
 
-## Script can
+## Script allows
 
  1. Checking the localizable file from masterLanguageCode and find missing keys in other localizable files
  2. Searching potentially untranslated keys from localizable files
  3. Checking duplicate keys from localizable files
  4. Checking unused keys from localizable files
- 
+
 ![](Screens/3.png)
+
+## Accessibility
+
+1. Support .strings and .stringsdict formats
+2. Support any use notation: classic, l10n, localized, SwiftGen, and custom Regex
+3. You can ignore system keys
+4. Any settings for generation errors or warnings
 
 ## Install
 
@@ -23,8 +30,8 @@ ${SRCROOT}/Localinter.swift
 
 ## Setup:
 
-  ```swift
-  /// It language will come as general and ideal
+```swift
+/// It language will come as general and ideal
 let masterLanguageCode = "en"
 
 /// Path of folder with localizations files. For example "/YouProject/Resources/Languages"
@@ -62,4 +69,4 @@ let isClearWhitespasesInLocalizableFiles = false
 let isOnlyOneLanguage = false
 /// Cleaning localizable files. Will remove comments, empty lines and order your keys by alphabetical.
 let isCleaningFiles = false
-  ```
+```
