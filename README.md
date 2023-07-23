@@ -35,10 +35,10 @@ ${SRCROOT}/Localinter.swift
 let masterLanguageCode = "en"
 
 /// Path of folder with localizations files. For example "/YouProject/Resources/Languages"
-let relativeLocalizablePath = ""
+let relativeLocalizablePath = "/YourProject/Resources/Strings"
 
 /// Path of the source folder which will used in searching for localization keys you actually use in your project. For Example "/YouProject/Source"
-let relativeSourcePath = "/Strings/Src"
+let relativeSourcePath = "/YourProject"
 
 /// yuo can use many types
 let usingTypes: [UsingType] = [
