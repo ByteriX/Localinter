@@ -1,0 +1,10 @@
+/*
+  Localizable.strings
+  Strings
+
+  Created by Sergey Balalaev on 04.09.2022.
+ 
+*/
+
+"Hello.world" = "Привет мир!";
+"Help.me" = "Помоги мне";
