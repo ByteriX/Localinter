@@ -1,7 +1,7 @@
 #!/usr/bin/env xcrun --sdk macosx swift
 /**
  Localinter.swift
- version 1.1.1
+ version 1.2
  
  Created by Sergey Balalaev on 31.08.22.
  Copyright (c) 2022 ByteriX. All rights reserved.
@@ -27,14 +27,15 @@ let isEnabled = true
 let masterLanguageCode = "en"
 
 /// Path of folder with localizations files. For example "/YouProject/Resources/Languages"
-let relativeLocalizablePath = "/YourProject/Resources/Strings"
+let relativeLocalizablePath = ""
 
 /// Path of the source folder which will used in searching for localization keys you actually use in your project. For Example "/YouProject/Source"
-let relativeSourcePath = "/YourProject"
+let relativeSourcePath = "/Strings/Src"
 
 /// Using localizations type from code. If you use custom you need define regex pattern
 enum UsingType {
     case standart
+    case swiftUI
     case l10n
     case localized
     case swiftGen(enumName: String = "Localizable")
@@ -43,7 +44,8 @@ enum UsingType {
 
 /// yuo can use many types
 let usingTypes: [UsingType] = [
-    .standart
+    .swiftGen(enumName: #"Strings\.Localizable"#),
+    .swiftUI
 ]
 
 /**
@@ -56,11 +58,16 @@ let usingTypes: [UsingType] = [
   ]
  */
 let ignoredUnusedKeys: Set<String> = [
+    "CFBundleDisplayName",
+    "NSCameraUsageDescription"
 ]
 
 /// If you want to exclude untranslated keys from checking, you can define they this
 let ignoredUntranslatedKeys: Set<String> = [
 ]
+
+let sourcesExtensions = ["swift", "mm", "m"]
+let sourcesSetExtensions = Set<String>(sourcesExtensions.map{$0.uppercased()})
 
 let isThrowingErrorForUntranslated = true
 let isThrowingErrorForUnused = true
@@ -92,6 +99,8 @@ for usingType in usingTypes {
         searchUsingRegexPatterns.append(pattern)
     case .standart:
         searchUsingRegexPatterns.append("NSLocalized(Format)?String\\(\\s*@?\"([\\w\\.]+)\"")
+    case .swiftUI:
+        searchUsingRegexPatterns.append(#"\bText\(\s*"(.*)"\s*\)"#)
     case .swiftGen(let enumName):
         searchUsingRegexPatterns.append(enumName + #"\s*\.((?:\.*[A-Z]{1}[A-z0-9]*)*)\s*((?:\.*[a-z]{1}[A-z0-9]*))"#)
     case .l10n:
@@ -387,18 +396,25 @@ let localizableFiles = supportedLanguages
 
 // MARK: - detect unused Keys
 
+let sourcesRegex = searchUsingRegexPatterns.compactMap { regexPattern in
+    let regex = try? NSRegularExpression(pattern: regexPattern, options: [])
+    if regex == nil {
+        printError(fileName: #file, message: "Not right pattern for regex: \(regexPattern)", line: #line)
+    }
+    return regex
+}
 let sourcePath = FileManager.default.currentDirectoryPath + relativeSourcePath
 let swiftFileEnumerator = FileManager.default.enumerator(atPath: sourcePath)
 var localizedStringKeys: [String] = []
-for regexPattern in searchUsingRegexPatterns {
-    let regex = try? NSRegularExpression(pattern: regexPattern, options: [])
-    while let sourceFileName = swiftFileEnumerator?.nextObject() as? String {
-        // checks the extension
-        if sourceFileName.hasSuffix(".swift") || sourceFileName.hasSuffix(".m") || sourceFileName.hasSuffix(".mm") {
-            let sourceFilePath = "\(sourcePath)/\(sourceFileName)"
-            if let string = try? String(contentsOfFile: sourceFilePath, encoding: .utf8) {
-                let range = NSRange(location: 0, length: (string as NSString).length)
-                regex?.enumerateMatches(in: string,
+while let sourceFileName = swiftFileEnumerator?.nextObject() as? String {
+    let fileExtension = (sourceFileName as NSString).pathExtension.uppercased()
+    // checks the extension
+    if sourcesSetExtensions.contains(fileExtension) {
+        let sourceFilePath = "\(sourcePath)/\(sourceFileName)"
+        if let string = try? String(contentsOfFile: sourceFilePath, encoding: .utf8) {
+            let range = NSRange(location: 0, length: (string as NSString).length)
+            sourcesRegex.forEach{ regex in
+                regex.enumerateMatches(in: string,
                                         options: [],
                                         range: range) { result, _, _ in
                     addLocalizedStringKey(from: string, result: result)
