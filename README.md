@@ -13,7 +13,7 @@ Check localizable files for Swift
 
 ## Accessibility
 
-1. Support .strings and .stringsdict formats
+1. Support .strings, .stringsdict and new .xcstrings formats
 2. Support any use notation: classic, l10n, localized, SwiftGen, SwiftUI, and custom Regex
 3. You can ignore system keys
 4. Any settings for generation errors or warnings

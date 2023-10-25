@@ -15,6 +15,8 @@ struct ContentView: View {
         Text(Strings.Localizable.Hello.world)
         Text(Strings.Localizable.Hello.worlds(count))
         Text("Help.me")
+        Text("Strings.Catalog")
+        Text("Strings.Catalog in %lld to %lld")
     }
 }
 

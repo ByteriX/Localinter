@@ -1,7 +1,7 @@
 #!/usr/bin/env xcrun --sdk macosx swift
 /**
  Localinter.swift
- version 1.2
+ version 1.3
  
  Created by Sergey Balalaev on 31.08.22.
  Copyright (c) 2022 ByteriX. All rights reserved.
@@ -193,6 +193,20 @@ struct LocalizableFiles {
         processFiles()
     }
 
+    private mutating func processCatalogStringsFiles(ignoredTranslation: inout [String]) {
+        let path = localizablePath
+        if !FileManager.default.fileExists(atPath: path) {
+            print("Invalid path of localizable files: \(path) does not exist.")
+            exit(1)
+        }
+        let fileEnumerator = FileManager.default.enumerator(atPath: path)
+        while let fileName = fileEnumerator?.nextObject() as? String {
+            if fileName.hasSuffix(".xcstrings") {
+                checkCatalogFile(fileName: fileName, ignoredTranslation: &ignoredTranslation)
+            }
+        }
+    }
+
     private mutating func processFiles() {
         keyValue = [:]
         var ignoredTranslation: [String] = []
@@ -206,6 +220,8 @@ struct LocalizableFiles {
                 printError(fileName: fileName, message: "Not understand localizable file with name: \(fileName)", isWarning: true)
             }
         }
+
+        processCatalogStringsFiles(ignoredTranslation: &ignoredTranslation)
 
         ignoredFromSameTranslation[code] = ignoredTranslation
         for key in ignoredUntranslatedKeys {
@@ -337,6 +353,57 @@ struct LocalizableFiles {
                     linesNumbers[key] = lineNumber + 1
                 }
             }
+        }
+    }
+
+    private mutating func checkCatalogFile(fileName: String, ignoredTranslation: inout [String]) {
+
+        struct XCUnit: Decodable {
+            let state: String
+            let value: String
+        }
+
+        struct XCValue: Decodable {
+            let stringUnit: XCUnit
+        }
+
+        struct XCItem: Decodable {
+            let localizations: [String: XCValue]
+        }
+
+        struct XCRoot: Decodable {
+            let sourceLanguage: String
+            let strings: [String: XCItem]
+        }
+
+        let filePath = localizablePath + "/" + fileName
+        let url = URL(fileURLWithPath: filePath)
+        guard let data = try? Data(contentsOf: url),
+              let root = try? JSONDecoder().decode(XCRoot.self, from: data)
+        else {
+
+            return
+        }
+
+        for (lineNumber, keyItem) in root.strings.keys.enumerated() {
+            let key = keyItem
+
+            let valueFormat = root.strings[key]?.localizations[code]?.stringUnit.value
+
+            let value = valueFormat
+
+            if keyValue[key] != nil {
+                printError(
+                    fileName: fileName,
+                    code: code,
+                    message: "[Duplication] \"\(key)\"  is duplicated in \(code.uppercased()) file",
+                    line: linesNumbers[key]
+                )
+            } else {
+                keyValue[key] = value
+                linesNumbers[key] = lineNumber + 1
+            }
+
         }
     }
 
