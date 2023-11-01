@@ -38,6 +38,10 @@ enum UsingType {
     case swiftUI
     case l10n
     case localized
+    /// Actualy you can chouse enumName as is in your yaml SwiftGen settings file + strings file name seporated '\.'.
+    /// For example: in yaml enumName: "YourStrings", string file name is "Str.strings", then you should use swiftGen(enumName: "YourStrings\.Str")
+    /// but in yaml you can chouse forceFileNameEnum for remove string file name from generated constants, then you should use swiftGen(enumName: "YourStrings")
+    /// IMPORTANT: If you use "your.const.variable" string const in Str.strings file, SwiftGen generate "Your.Const.variable" with uppercased enum names. Localinter case sensitive and not found using from code this. Then I sugest to use "Your.Const.variable" string const in Str.strings file.
     case swiftGen(enumName: String = "Localizable")
     case custom(pattern: String)
 }
