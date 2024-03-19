@@ -44,6 +44,7 @@
 		7C25ECCF5AF881C8A192C287 /* Pods-Strings.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Strings.release.xcconfig"; path = "Target Support Files/Pods-Strings/Pods-Strings.release.xcconfig"; sourceTree = "<group>"; };
 		C3186F522A6D0BBD007728A5 /* Localinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Localinter.swift; path = ../../Localinter.swift; sourceTree = "<group>"; };
 		C3577B352AE955660065E1B7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		C3B83C1D2BA99B6F00E9F6A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C3E64EF428C515E00085A4D6 /* Strings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Strings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3E64EF728C515E00085A4D6 /* StringsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsApp.swift; sourceTree = "<group>"; };
 		C3E64EFB28C515E20085A4D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		C3E64EF628C515E00085A4D6 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
+				C3B83C1D2BA99B6F00E9F6A6 /* Info.plist */,
 				C3E64F3E28C778CA0085A4D6 /* Strings+Generated.swift */,
 				C3E64EF728C515E00085A4D6 /* StringsApp.swift */,
 				C3E64F4328C7E3CE0085A4D6 /* Src */,
@@ -199,6 +201,8 @@
 			dependencies = (
 			);
 			name = Strings;
+			packageProductDependencies = (
+			);
 			productName = Strings;
 			productReference = C3E64EF428C515E00085A4D6 /* Strings.app */;
 			productType = "com.apple.product-type.application";
@@ -271,6 +275,8 @@
 				ru,
 			);
 			mainGroup = C3E64EEB28C515E00085A4D6;
+			packageReferences = (
+			);
 			productRefGroup = C3E64EF528C515E00085A4D6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -608,6 +614,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Strings/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Strings/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -637,6 +644,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Strings/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Strings/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

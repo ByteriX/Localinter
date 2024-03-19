@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Strings
+
+  Created by Sergey Balalaev on 07.09.2022.
+  
+*/
+
+"CFBundleDisplayName" = "Strings";
+"NSCameraUsageDescription" = "This app needs the camera to scan barcodes";
