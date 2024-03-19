@@ -16,10 +16,10 @@ let isEnabled = true
 let masterLanguageCode = "en"
 
 /// Path of folder with localizations files. For example "/YouProject/Resources/Languages"
-let relativeLocalizablePath = "/Sources/Strings"
+let relativeLocalizablePath = ""
 
 /// Path of the source folder which will used in searching for localization keys you actually use in your project. For Example "/YouProject/Source"
-let relativeSourcePath = "/Sources/Strings"
+let relativeSourcePath = ""
 
 /// Using localizations type from code. If you use custom you need define regex pattern
 enum UsingType {
@@ -82,7 +82,7 @@ extension String {
 let localizablePath = FileManager.default.currentDirectoryPath + relativeLocalizablePath
 
 func getLocalizableFilePath(fileName: String, code: String) -> String {
-    return isOnlyOneLanguage ? "\(localizablePath)/\(fileName)" : "\(localizablePath)/\(code).lproj/\(fileName)"
+    return "\(localizablePath)/\(fileName)"
 }
 
 var searchUsingRegexPatterns: [String] = []
@@ -115,7 +115,7 @@ func supportedLanguagesList() -> [String] {
     print("Found next languages:")
     while let fileName = fileEnumerator?.nextObject() as? String {
         if fileName.hasSuffix(extensionName) {
-            let code = fileName.replacingOccurrences(of: ".\(extensionName)", with: "")
+            let code = (fileName.replacingOccurrences(of: ".\(extensionName)", with: "") as NSString).lastPathComponent
             print(code)
             result.append(code)
         }
@@ -123,27 +123,9 @@ func supportedLanguagesList() -> [String] {
     return result
 }
 
-/// Detect names of localizable files
-func localizableFileNamesList() -> [String] {
-    var result: [String] = []
-    let path = getLocalizableFilePath(fileName: "", code: masterLanguageCode)
-    if !FileManager.default.fileExists(atPath: path) {
-        print("Invalid path of localizable files: \(path) does not exist.")
-        exit(1)
-    }
-    let fileEnumerator = FileManager.default.enumerator(atPath: path)
-    print("Found next localizable files:")
-    while let fileName = fileEnumerator?.nextObject() as? String {
-        print(fileName)
-        result.append(fileName)
-    }
-    return result
-}
-
 // MARK: detection resources of localization
 
 let supportedLanguages = supportedLanguagesList()
-let localizableFileNames = localizableFileNamesList()
 var ignoredFromSameTranslation: [String: [String]] = [:]
 var warningsCount = 0
 var errorsCount = 0
@@ -156,7 +138,7 @@ if isEnabled == false {
     exit(000)
 }
 
-func printError(fileName: String = localizableFileNames.first ?? "", code: String = masterLanguageCode, message: String,
+func printError(fileName: String = masterLocalizableFiles.fileNames.first ?? "", code: String = masterLanguageCode, message: String,
                 line: Int? = nil, isWarning: Bool = false) {
     var result = getLocalizableFilePath(fileName: fileName, code: code)
     if let line = line {
@@ -178,15 +160,27 @@ struct LocalizableFiles {
     private(set) var code: String
     private(set) var keyValue: [String: String]
     private(set) var linesNumbers: [String: Int]
+    private(set) var fileNames: [String]
 
     init(code: String) {
         self.code = code
         keyValue = [:]
         linesNumbers = [:]
+        fileNames = []
         processFiles()
     }
 
-    private mutating func processCatalogStringsFiles(ignoredTranslation: inout [String]) {
+    private func checkCode(for fileName: String) -> Bool {
+        if isOnlyOneLanguage {
+            return true
+        }
+        if fileName.contains("\(code).lproj/") {
+            return true
+        }
+        return false
+    }
+
+    private mutating func processAllStringsFiles(ignoredTranslation: inout [String]) {
         let path = localizablePath
         if !FileManager.default.fileExists(atPath: path) {
             print("Invalid path of localizable files: \(path) does not exist.")
@@ -195,7 +189,14 @@ struct LocalizableFiles {
         let fileEnumerator = FileManager.default.enumerator(atPath: path)
         while let fileName = fileEnumerator?.nextObject() as? String {
             if fileName.hasSuffix(".xcstrings") {
+                fileNames.append(fileName)
                 checkCatalogFile(fileName: fileName, ignoredTranslation: &ignoredTranslation)
+            } else if fileName.hasSuffix(".strings"), checkCode(for: fileName) {
+                fileNames.append(fileName)
+                processStringsFile(fileName: fileName, ignoredTranslation: &ignoredTranslation)
+            } else if fileName.hasSuffix(".stringsdict"), checkCode(for: fileName) {
+                fileNames.append(fileName)
+                checkDictionaryFile(fileName: fileName, ignoredTranslation: &ignoredTranslation)
             }
         }
     }
@@ -204,17 +205,7 @@ struct LocalizableFiles {
         keyValue = [:]
         var ignoredTranslation: [String] = []
 
-        for fileName in localizableFileNames {
-            if fileName.hasSuffix(".strings") {
-                processStringsFile(fileName: fileName, ignoredTranslation: &ignoredTranslation)
-            } else if fileName.hasSuffix(".stringsdict") {
-                checkDictionaryFile(fileName: fileName, ignoredTranslation: &ignoredTranslation)
-            } else {
-                printError(fileName: fileName, message: "Not understand localizable file with name: \(fileName)", isWarning: true)
-            }
-        }
-
-        processCatalogStringsFiles(ignoredTranslation: &ignoredTranslation)
+        processAllStringsFiles(ignoredTranslation: &ignoredTranslation)
 
         ignoredFromSameTranslation[code] = ignoredTranslation
         for key in ignoredUntranslatedKeys {
