@@ -93,7 +93,7 @@ for usingType in usingTypes {
     case .standart:
         searchUsingRegexPatterns.append("NSLocalized(Format)?String\\(\\s*@?\"([\\w\\.]+)\"")
     case .swiftUI:
-        searchUsingRegexPatterns.append(#"\bText\(\s*"(.*)"\s*\)"#)
+        searchUsingRegexPatterns.append(#"\bText\(\s*"(.*?)"\s*[\)|,]"#)
     case .swiftGen(let enumName):
         searchUsingRegexPatterns.append(enumName + #"\s*\.((?:\.*[A-Z]{1}[A-z0-9]*)*)\s*((?:\.*[a-z]{1}[A-z0-9]*))"#)
     case .l10n:
