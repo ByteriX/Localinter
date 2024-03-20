@@ -37,8 +37,9 @@ struct Settings {
 
     /// yuo can use many types
     var usingTypes: [UsingType] = [
+        .standart,
+        .swiftUI,
         .swiftGen(enumName: #"Strings\.Localizable"#),
-        .swiftUI
     ]
 
     /**
@@ -50,15 +51,12 @@ struct Settings {
      "NSCameraUsageDescription"
      ]
      */
-    var ignoredUnusedKeys: Set<String> = [
-        "CFBundleDisplayName",
-        "NSCameraUsageDescription"
-    ]
+    var ignoredUnusedKeys: Set<String> = [ ]
 
     /// If you want to exclude untranslated keys from checking, you can define they this
-    var ignoredUntranslatedKeys: Set<String> = [
-    ]
+    var ignoredUntranslatedKeys: Set<String> = [ ]
 
+    /// For sources code analysis
     var sourcesExtensions = Set<String>(["swift", "mm", "m"].map{$0.uppercased()})
 
     var isThrowingErrorForUntranslated = true
