@@ -250,7 +250,7 @@ extension Settings {
         let value: String
     }
 
-    private static let regexObject = try! NSRegularExpression(pattern: #"([A-z0-9]+?)\s*:"#, options: [.caseInsensitive])
+    private static let regexObject = try! NSRegularExpression(pattern: #"^([A-z0-9]+?)\s*:"#, options: [.caseInsensitive])
 
     private static func getObject(line: String) -> Object? {
         let results = regexObject.matches(in: line, range: NSRange(line.startIndex..., in: line))
