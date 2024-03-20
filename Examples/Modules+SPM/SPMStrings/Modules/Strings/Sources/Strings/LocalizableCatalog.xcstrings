@@ -71,7 +71,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Формат найде в %#@arg1@ из %#@arg2@"
+            "value" : "Формат найден в %#@arg1@ из %#@arg2@"
           },
           "substitutions" : {
             "arg1" : {

@@ -21,6 +21,9 @@ public struct ContentView: View {
         Text("Help.me", bundle: Bundle.module)
         Text("Strings.Catalog", tableName: "LocalizableCatalog", bundle: Bundle.module)
         Text("Strings.Catalog in %lld to %lld", tableName: "LocalizableCatalog", bundle: Bundle.module)
+
+
+        Text("Special.Untranslated")
     }
 }
 

@@ -1,0 +1,27 @@
+
+isEnabled: true
+masterLanguageCode: en
+relativeLocalizablePath: /Sources
+relativeSourcePath: /Sources
+usingTypes: 
+  - case: standart
+  - case: swiftUI
+  - case: l10n
+  - case: localized
+  - case: swiftGen
+    enumName: Localizable
+  - case: custom
+    pattern: "(.*)".localized
+ignoredUnusedKeys:
+  - CFBundleDisplayName
+  - NSCameraUsageDescription
+ignoredUntranslatedKeys:
+  - Special.Untranslated
+sourcesExtensions:
+  - swift
+  - cpp
+isThrowingErrorForUntranslated: true
+isThrowingErrorForUnused: true
+isClearWhitespasesInLocalizableFiles: false
+isOnlyOneLanguage: false
+isCleaningFiles: true

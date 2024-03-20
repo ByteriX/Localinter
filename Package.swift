@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Localinter",
-    platforms: [.iOS(.v12)],
+    platforms: [.iOS(.v12), .macOS(.v13)],
     products: [
         .library(
             name: "Localinter",
@@ -16,6 +16,8 @@ let package = Package(
             targets: ["LocalinterPlugin"]
         ),
     ],
+    dependencies: [
+    ],
     targets: [
         .target(
             name: "Localinter",
@@ -23,7 +25,8 @@ let package = Package(
         ),
         .executableTarget(
             name: "LocalinterExec",
-            dependencies: []
+            dependencies: [
+            ]
         ),
         .plugin(name: "LocalinterPlugin", capability: .buildTool(), dependencies: ["LocalinterExec"])
     ]
