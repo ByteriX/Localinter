@@ -8,6 +8,7 @@ Any significant changes made to this project will be documented in this file.
 #### Added
 
 - Supporting SPM plugin.
+- Settings from YAML.
 
 #### Fixed
 
