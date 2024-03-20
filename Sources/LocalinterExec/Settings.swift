@@ -77,8 +77,6 @@ struct Settings {
 extension Settings {
 
     private static let fileName = "localinter.yaml"
-    private static let objectSeporator = ":"
-    private static let arrayStart: Character = "-"
 
     private enum Key: String {
         case isEnabled
@@ -264,17 +262,17 @@ extension Settings {
         return nil
     }
 
-    private static func getArrayObject(line: String) -> Object? {
-        guard line.first == Self.arrayStart else {
-            return nil
-        }
-        return getObject(line: line.dropFirst().trimmingCharacters(in: .whitespaces))
-    }
-
     private static func getArrayValue(line: String) -> String? {
-        guard line.first == Self.arrayStart else {
+        guard line.first == "-" else {
             return nil
         }
         return line.dropFirst().trimmingCharacters(in: .whitespaces)
+    }
+
+    private static func getArrayObject(line: String) -> Object? {
+        guard let value = getArrayValue(line: line) else {
+            return nil
+        }
+        return getObject(line: value)
     }
 }
