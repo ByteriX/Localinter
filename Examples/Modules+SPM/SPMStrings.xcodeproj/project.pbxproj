@@ -7,13 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C33DF7D72BACC16800BA04FE /* SPMStringsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33DF7D62BACC16800BA04FE /* SPMStringsUITests.swift */; };
+		C33DF7D92BACC16800BA04FE /* SPMStringsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33DF7D82BACC16800BA04FE /* SPMStringsUITestsLaunchTests.swift */; };
+		C33DF7E02BACC27800BA04FE /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33DF7DF2BACC27800BA04FE /* XCUIElement.swift */; };
 		C38ECB3E2BA9A5470046214C /* SPMStringsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38ECB3D2BA9A5470046214C /* SPMStringsApp.swift */; };
 		C38ECB422BA9A5480046214C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C38ECB412BA9A5480046214C /* Assets.xcassets */; };
 		C38ECB452BA9A5480046214C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C38ECB442BA9A5480046214C /* Preview Assets.xcassets */; };
 		C38ECB502BA9A97B0046214C /* Strings in Frameworks */ = {isa = PBXBuildFile; productRef = C38ECB4F2BA9A97B0046214C /* Strings */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C33DF7DA2BACC16800BA04FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C38ECB322BA9A5470046214C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C38ECB392BA9A5470046214C;
+			remoteInfo = SPMStrings;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		C33DF7D42BACC16800BA04FE /* SPMStringsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPMStringsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C33DF7D62BACC16800BA04FE /* SPMStringsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPMStringsUITests.swift; sourceTree = "<group>"; };
+		C33DF7D82BACC16800BA04FE /* SPMStringsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPMStringsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C33DF7DF2BACC27800BA04FE /* XCUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
 		C38ECB3A2BA9A5470046214C /* SPMStrings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPMStrings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C38ECB3D2BA9A5470046214C /* SPMStringsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPMStringsApp.swift; sourceTree = "<group>"; };
 		C38ECB412BA9A5480046214C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -22,6 +39,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C33DF7D12BACC16800BA04FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C38ECB372BA9A5470046214C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,10 +57,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C33DF7D52BACC16800BA04FE /* SPMStringsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C33DF7D62BACC16800BA04FE /* SPMStringsUITests.swift */,
+				C33DF7D82BACC16800BA04FE /* SPMStringsUITestsLaunchTests.swift */,
+				C33DF7DF2BACC27800BA04FE /* XCUIElement.swift */,
+			);
+			path = SPMStringsUITests;
+			sourceTree = "<group>";
+		};
 		C38ECB312BA9A5470046214C = {
 			isa = PBXGroup;
 			children = (
 				C38ECB3C2BA9A5470046214C /* SPMStrings */,
+				C33DF7D52BACC16800BA04FE /* SPMStringsUITests */,
 				C38ECB3B2BA9A5470046214C /* Products */,
 				C38ECB4E2BA9A97B0046214C /* Frameworks */,
 			);
@@ -46,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				C38ECB3A2BA9A5470046214C /* SPMStrings.app */,
+				C33DF7D42BACC16800BA04FE /* SPMStringsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,6 +123,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C33DF7D32BACC16800BA04FE /* SPMStringsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C33DF7DE2BACC16800BA04FE /* Build configuration list for PBXNativeTarget "SPMStringsUITests" */;
+			buildPhases = (
+				C33DF7D02BACC16800BA04FE /* Sources */,
+				C33DF7D12BACC16800BA04FE /* Frameworks */,
+				C33DF7D22BACC16800BA04FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C33DF7DB2BACC16800BA04FE /* PBXTargetDependency */,
+			);
+			name = SPMStringsUITests;
+			productName = SPMStringsUITests;
+			productReference = C33DF7D42BACC16800BA04FE /* SPMStringsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		C38ECB392BA9A5470046214C /* SPMStrings */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C38ECB482BA9A5480046214C /* Build configuration list for PBXNativeTarget "SPMStrings" */;
@@ -117,6 +171,10 @@
 				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
+					C33DF7D32BACC16800BA04FE = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = C38ECB392BA9A5470046214C;
+					};
 					C38ECB392BA9A5470046214C = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -137,11 +195,19 @@
 			projectRoot = "";
 			targets = (
 				C38ECB392BA9A5470046214C /* SPMStrings */,
+				C33DF7D32BACC16800BA04FE /* SPMStringsUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C33DF7D22BACC16800BA04FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C38ECB382BA9A5470046214C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,6 +220,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C33DF7D02BACC16800BA04FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C33DF7D92BACC16800BA04FE /* SPMStringsUITestsLaunchTests.swift in Sources */,
+				C33DF7E02BACC27800BA04FE /* XCUIElement.swift in Sources */,
+				C33DF7D72BACC16800BA04FE /* SPMStringsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C38ECB362BA9A5470046214C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,7 +240,49 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C33DF7DB2BACC16800BA04FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C38ECB392BA9A5470046214C /* SPMStrings */;
+			targetProxy = C33DF7DA2BACC16800BA04FE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		C33DF7DC2BACC16800BA04FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ByteriX.SPMStringsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SPMStrings;
+			};
+			name = Debug;
+		};
+		C33DF7DD2BACC16800BA04FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ByteriX.SPMStringsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SPMStrings;
+			};
+			name = Release;
+		};
 		C38ECB462BA9A5480046214C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -345,6 +463,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C33DF7DE2BACC16800BA04FE /* Build configuration list for PBXNativeTarget "SPMStringsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C33DF7DC2BACC16800BA04FE /* Debug */,
+				C33DF7DD2BACC16800BA04FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C38ECB352BA9A5470046214C /* Build configuration list for PBXProject "SPMStrings" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

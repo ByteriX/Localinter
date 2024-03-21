@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Localinter",
-    platforms: [.iOS(.v12), .macOS(.v13)],
+    platforms: [.iOS(.v12), .macOS(.v11)],
     products: [
         .library(
             name: "Localinter",
