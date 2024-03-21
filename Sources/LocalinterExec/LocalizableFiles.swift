@@ -136,7 +136,6 @@ struct LocalizableFiles {
         }
 
         func notFoundKey(key: String, value: String, lineNumber: Int) {
-#warning("Please check [Not found] for zero. Not show file from stringsdict.")
             printError(
                 fileName: fileName,
                 code: code,

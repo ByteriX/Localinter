@@ -15,6 +15,7 @@ Any significant changes made to this project will be documented in this file.
 
 - Regular expression for SwiftUI bundle/tableName support.
 - Recursive searching of .strings and .stringsdict files as .xcstrings.
+- True error and warning position in .strings file.
 
 
 ## [1.3.0] - 2023-10-25
