@@ -3,7 +3,17 @@
 
 Any significant changes made to this project will be documented in this file.
 
-## [2.0.0] - 2024-03-22
+## [2.0.1] - 2024-03-22
+
+#### Added
+
+- Tests to release.
+
+#### Fixed
+
+- Documentation with intallation and setup settings sections.
+
+## [2.0.0] - 2024-03-21
 
 #### Added
 
