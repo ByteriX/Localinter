@@ -299,12 +299,11 @@ struct LocalizableFiles {
         guard let dictionary = NSDictionary(contentsOfFile: filePath) else {
             return
         }
-
         func notFoundKey(key: String, value: String, lineNumber: Int) {
             printError(
                 fileName: fileName,
                 code: code,
-                message: "error: [Not found] \"\(key)\" \(value) is not found key from \(code.uppercased()) dictionary file",
+                message: "[Not found] \"\(key)\" \(value) is not found key from \(code.uppercased()) dictionary file",
                 line: lineNumber
             )
         }

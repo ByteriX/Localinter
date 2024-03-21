@@ -12,18 +12,13 @@ struct LocalinterPlugin: BuildToolPlugin {
     func createBuildCommands(context: PackagePlugin.PluginContext, target: Target) throws -> [PackagePlugin.Command] {
         let executable = try context.tool(named: "LocalinterExec").path
 
-        //let inputPath = context.pluginWorkDirectory.appending(subpath: "Generated")
-        let outputPath = context.pluginWorkDirectory.appending(subpath: "Localzable")
-
-        print(target.directory.string)
-
         return [
             .buildCommand(
                 displayName: "Running Localinter",
                 executable: executable,
                 arguments: [
-                    "--sources", target.directory.string,
-                    "--localizable", target.directory.string,
+//                    "--sources", target.directory.string,
+//                    "--localizable", target.directory.string,
                 ]
             ),
         ]
@@ -37,16 +32,13 @@ struct LocalinterPlugin: BuildToolPlugin {
         func createBuildCommands(context: XcodeProjectPlugin.XcodePluginContext, target: XcodeProjectPlugin.XcodeTarget) throws -> [PackagePlugin.Command] {
             let executable = try context.tool(named: "LocalinterExec").path
 
-            //let inputPath = context.pluginWorkDirectory.appending(subpath: "Generated")
-            let outputPath = context.pluginWorkDirectory.appending(subpath: "Localzable")
-
             return [
                 .buildCommand(
                     displayName: "Running Localinter",
                     executable: executable,
                     arguments: [
-                        "--sources", context.xcodeProject.directory.string,
-                        "--localizable", context.xcodeProject.directory.string,
+//                        "--sources", context.xcodeProject.directory.string,
+//                        "--localizable", context.xcodeProject.directory.string,
                     ]
                 ),
             ]

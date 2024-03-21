@@ -13,12 +13,14 @@ struct LocalizableFiles {
     private(set) var keyValue: [String: String]
     private(set) var linesNumbers: [String: Int]
     private(set) var fileNames: [String]
+    private(set) var keyFileNames: [String: String]
 
     init(code: String) {
         self.code = code
         keyValue = [:]
         linesNumbers = [:]
         fileNames = []
+        keyFileNames = [:]
         processFiles()
     }
 
@@ -121,6 +123,7 @@ struct LocalizableFiles {
                 } else {
                     keyValue[key] = value
                     linesNumbers[key] = lineNumber + 1
+                    keyFileNames[key] = fileName
                 }
             }
         }
@@ -133,10 +136,11 @@ struct LocalizableFiles {
         }
 
         func notFoundKey(key: String, value: String, lineNumber: Int) {
+#warning("Please check [Not found] for zero. Not show file from stringsdict.")
             printError(
                 fileName: fileName,
                 code: code,
-                message: "error: [Not found] \"\(key)\" \(value) is not found key from \(code.uppercased()) dictionary file",
+                message: "[Not found] \"\(key)\" \(value) is not found key from \(code.uppercased()) dictionary file",
                 line: lineNumber
             )
         }
@@ -187,6 +191,7 @@ struct LocalizableFiles {
                 } else {
                     keyValue[key] = value
                     linesNumbers[key] = lineNumber + 1
+                    keyFileNames[key] = fileName
                 }
             }
         }
@@ -238,6 +243,7 @@ struct LocalizableFiles {
             } else {
                 keyValue[key] = value
                 linesNumbers[key] = lineNumber + 1
+                keyFileNames[key] = fileName
             }
 
         }

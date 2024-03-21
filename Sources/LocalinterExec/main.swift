@@ -163,6 +163,7 @@ for file in localizableFiles {
             if stringValue == masterLocalizableFiles.keyValue[key], settings.ignoredUntranslatedKeys.contains(key) == false {
                 if (ignoredFromSameTranslation[file.code]?.contains(key) ?? false) == false {
                     printError(
+                        fileName: file.keyFileNames[key] ?? "",
                         code: file.code,
                         message: "[Potentially Untranslated] \"\(key)\" in \(file.code.uppercased()) file doesn't seem to be localized",
                         line: file.linesNumbers[key],
@@ -172,7 +173,7 @@ for file in localizableFiles {
             }
         } else {
             printError(
-                code: file.code,
+                code: masterLocalizableFiles.code,
                 message: "[Missing] \"\(key)\" missing from \(file.code.uppercased()) file",
                 line: masterLocalizableFiles.linesNumbers[key]
             )
@@ -183,6 +184,7 @@ for file in localizableFiles {
 
     for key in redundantKeys {
         printError(
+            fileName: file.keyFileNames[key] ?? "",
             code: file.code,
             message: "[Redundant key] \"\(key)\" redundant in \(file.code.uppercased()) file",
             line: file.linesNumbers[key]
