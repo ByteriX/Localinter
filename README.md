@@ -45,7 +45,7 @@ Once you have your Swift package set up, adding `Localinter` as a dependency is 
     
 ```
 
-### 1.3 version instalation
+### Old 1.3 version instalation
 
 1. Just copy Localinter.swift to project.
 2. Exclude from "Build Phases" -> "Compile Sources"
@@ -57,9 +57,7 @@ ${SRCROOT}/Localinter.swift
 
 ## Setup:
 
-Just add to your root dir the file `localinter.yaml`.
-If you use multymodules project, you can add `localinter.yaml` to for each module dir.
-Formate this file:
+Simply add the file localinter.yaml to your root dir. If you are using a multi-modules project, you can add localinter.yaml for each module dir. Format this file:
 
 ```yaml
 isEnabled: true
