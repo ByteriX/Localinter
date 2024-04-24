@@ -21,10 +21,8 @@ extension String {
     }
 }
 
-let localizablePath = FileManager.default.currentDirectoryPath + settings.relativeLocalizablePath
-
 func getLocalizableFilePath(fileName: String, code: String) -> String {
-    return "\(localizablePath)/\(fileName)"
+    return "\(settings.localizablePath)/\(fileName)"
 }
 
 var searchUsingRegexPatterns: [String] = []
@@ -48,11 +46,11 @@ for usingType in settings.usingTypes {
 /// Detect supported languages
 func supportedLanguagesList() -> [String] {
     var result: [String] = []
-    if !FileManager.default.fileExists(atPath: localizablePath) {
-        print("Invalid configuration: \(localizablePath) does not exist.")
+    if !FileManager.default.fileExists(atPath: settings.localizablePath) {
+        print("Invalid configuration: \(settings.localizablePath) does not exist.")
         exit(1)
     }
-    let fileEnumerator = FileManager.default.enumerator(atPath: localizablePath)
+    let fileEnumerator = FileManager.default.enumerator(atPath: settings.localizablePath)
     let extensionName = "lproj"
     print("Found next languages:")
     while let fileName = fileEnumerator?.nextObject() as? String {
@@ -115,14 +113,14 @@ let sourcesRegex = searchUsingRegexPatterns.compactMap { regexPattern in
     }
     return regex
 }
-let sourcePath = FileManager.default.currentDirectoryPath + settings.relativeSourcePath
-let swiftFileEnumerator = FileManager.default.enumerator(atPath: sourcePath)
+
+let swiftFileEnumerator = FileManager.default.enumerator(atPath: settings.sourcePath)
 var localizedStringKeys: [String] = []
 while let sourceFileName = swiftFileEnumerator?.nextObject() as? String {
     let fileExtension = (sourceFileName as NSString).pathExtension.uppercased()
     // checks the extension
     if settings.sourcesExtensions.contains(fileExtension) {
-        let sourceFilePath = "\(sourcePath)/\(sourceFileName)"
+        let sourceFilePath = "\(settings.sourcePath)/\(sourceFileName)"
         if let string = try? String(contentsOfFile: sourceFilePath, encoding: .utf8) {
             let range = NSRange(location: 0, length: (string as NSString).length)
             sourcesRegex.forEach{ regex in

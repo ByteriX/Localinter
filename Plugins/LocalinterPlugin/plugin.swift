@@ -17,8 +17,7 @@ struct LocalinterPlugin: BuildToolPlugin {
                 displayName: "Running Localinter",
                 executable: executable,
                 arguments: [
-//                    "--sources", target.directory.string,
-//                    "--localizable", target.directory.string,
+                    "--settingsPath", target.directory.string
                 ]
             ),
         ]
@@ -37,8 +36,7 @@ struct LocalinterPlugin: BuildToolPlugin {
                     displayName: "Running Localinter",
                     executable: executable,
                     arguments: [
-//                        "--sources", context.xcodeProject.directory.string,
-//                        "--localizable", context.xcodeProject.directory.string,
+                        "--settingsPath", context.pluginWorkDirectory.string
                     ]
                 ),
             ]

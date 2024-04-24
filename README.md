@@ -25,7 +25,7 @@ From 2.0 version we support SPM plugin.
 
 ### Swift Package Manager (SPM)
 
-The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but `Localinter` does support its use on supported platforms. 
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. `Localinter` supports its use on supported platforms as plugin tool. 
 
 Once you have your Swift package set up, adding `Localinter` as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`. Then you need call from your target plugin like this:
 
@@ -57,7 +57,12 @@ ${SRCROOT}/Localinter.swift
 
 ## Setup:
 
-Simply add the file localinter.yaml to your root dir. If you are using a multi-modules project, you can add localinter.yaml for each module dir. Format this file:
+You need to add a settings file named `imagelinter.yaml` or/and `imagelinter.yml` to a `target` or/and `the root of the library` `dir` of the package.
+imagesPath and sourcePath are calculated from dir of this package. 
+
+Supports more settings files with rewrite properties with priority: first a `target` then `the root of library `dir`, first `imagelinter.yaml` then `imagelinter.yml`.
+
+### Example of Settings file format
 
 ```yaml
 isEnabled: true

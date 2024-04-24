@@ -35,7 +35,7 @@ struct LocalizableFiles {
     }
 
     private mutating func processAllStringsFiles(ignoredTranslation: inout [String]) {
-        let path = localizablePath
+        let path = settings.localizablePath
         if !FileManager.default.fileExists(atPath: path) {
             print("Invalid path of localizable files: \(path) does not exist.")
             exit(1)
@@ -216,7 +216,7 @@ struct LocalizableFiles {
             let strings: [String: XCItem]
         }
 
-        let filePath = localizablePath + "/" + fileName
+        let filePath = settings.localizablePath + "/" + fileName
         let url = URL(fileURLWithPath: filePath)
         guard let data = try? Data(contentsOf: url),
               let root = try? JSONDecoder().decode(XCRoot.self, from: data)
