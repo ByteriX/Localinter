@@ -1,6 +1,6 @@
 
 
-input_dir: ./
+input_dir: ./Strings/Resources/
 output_dir: ./
 
 
@@ -14,4 +14,4 @@ strings:
         publicAccess: true
         enumName: Strings
         noComments: 1
-      output: Strings/Strings+Generated.swift
+      output: Strings/Src/Strings+Generated.swift

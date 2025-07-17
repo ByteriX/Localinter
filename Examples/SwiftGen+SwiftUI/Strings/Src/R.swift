@@ -13,6 +13,7 @@ struct _R {
   let bundle: Foundation.Bundle
   var string: string { .init(bundle: bundle, preferredLanguages: nil, locale: nil) }
   var color: color { .init(bundle: bundle) }
+  var file: file { .init(bundle: bundle) }
 
   func string(bundle: Foundation.Bundle) -> string {
     .init(bundle: bundle, preferredLanguages: nil, locale: nil)
@@ -24,6 +25,9 @@ struct _R {
     .init(bundle: bundle, preferredLanguages: preferredLanguages, locale: locale)
   }
   func color(bundle: Foundation.Bundle) -> color {
+    .init(bundle: bundle)
+  }
+  func file(bundle: Foundation.Bundle) -> file {
     .init(bundle: bundle)
   }
   func validate() throws {
@@ -122,5 +126,19 @@ struct _R {
 
     /// Color `AccentColor`.
     var accentColor: RswiftResources.ColorResource { .init(name: "AccentColor", path: [], bundle: bundle) }
+  }
+
+  /// This `_R.file` struct is generated, and contains static references to 3 resource files.
+  struct file {
+    let bundle: Foundation.Bundle
+
+    /// Resource file `LocalizableCatalog.xcstrings`.
+    var localizableCatalogXcstrings: RswiftResources.FileResource { .init(name: "LocalizableCatalog", pathExtension: "xcstrings", bundle: bundle, locale: LocaleReference.none) }
+
+    /// Resource file `localinter.yaml`.
+    var localinterYaml: RswiftResources.FileResource { .init(name: "localinter", pathExtension: "yaml", bundle: bundle, locale: LocaleReference.none) }
+
+    /// Resource file `swiftgen.yml`.
+    var swiftgenYml: RswiftResources.FileResource { .init(name: "swiftgen", pathExtension: "yml", bundle: bundle, locale: LocaleReference.none) }
   }
 }
