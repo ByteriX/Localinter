@@ -3,7 +3,7 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return
+// swiftlint:disable superfluous_disable_command file_length implicit_return prefer_self_in_static_references
 
 // MARK: - Strings
 
@@ -11,18 +11,18 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum Strings {
   public enum InfoPlist {
-    public static let cfBundleDisplayName = Strings.tr("InfoPlist", "CFBundleDisplayName")
-    public static let nsCameraUsageDescription = Strings.tr("InfoPlist", "NSCameraUsageDescription")
+    public static let cfBundleDisplayName = Strings.tr("InfoPlist", "CFBundleDisplayName", fallback: "Strings")
+    public static let nsCameraUsageDescription = Strings.tr("InfoPlist", "NSCameraUsageDescription", fallback: "This app needs the camera to scan barcodes")
   }
   public enum Localizable {
     public enum Hello {
-      public static let world = Strings.tr("Localizable", "Hello.world")
+      public static let world = Strings.tr("Localizable", "Hello.world", fallback: "Hello, world!")
       public static func worlds(_ p1: Int) -> String {
-        return Strings.tr("Localizable", "Hello.worlds", p1)
+        return Strings.tr("Localizable", "Hello.worlds", p1, fallback: "Plural format key: \"%#@items@\"")
       }
     }
     public enum Help {
-      public static let me = Strings.tr("Localizable", "Help.me")
+      public static let me = Strings.tr("Localizable", "Help.me", fallback: "Help me")
     }
   }
 }
@@ -32,8 +32,8 @@ public enum Strings {
 // MARK: - Implementation Details
 
 extension Strings {
-  private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
+  private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String) -> String {
+    let format = BundleToken.bundle.localizedString(forKey: key, value: value, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }

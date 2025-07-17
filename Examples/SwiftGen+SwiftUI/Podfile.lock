@@ -1,24 +1,20 @@
 PODS:
-  - R.swift (6.1.0):
-    - R.swift.Library (~> 5.3.0)
-  - R.swift.Library (5.3.0)
-  - SwiftGen (6.5.1)
+  - R.swift (7.8.0)
+  - SwiftGen (6.6.3)
 
 DEPENDENCIES:
   - R.swift
   - SwiftGen
 
 SPEC REPOS:
-  https://gitlab.ozon.ru/ios_common/cocoa-pods-specs:
+  trunk:
     - R.swift
-    - R.swift.Library
     - SwiftGen
 
 SPEC CHECKSUMS:
-  R.swift: f8ba32605494aca705dd5a759ca0aa2c0a21f50f
-  R.swift.Library: 6d4463409eae9399db9f26b2c0ba48786afad920
-  SwiftGen: 92ed7e49eeba235e508526ae5b3eed2434831e44
+  R.swift: f573269ca45b2ab066c082e363dd4c2b297b0d71
+  SwiftGen: 4993cbf71cbc4886f775e26f8d5c3a1188ec9f99
 
-PODFILE CHECKSUM: b45534bbf77e08a5c104b7e8b6775da74076b494
+PODFILE CHECKSUM: 856eba9551d1e42a42bd86689743ad39fba558c7
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.16.2

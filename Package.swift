@@ -28,6 +28,6 @@ let package = Package(
             dependencies: [
             ]
         ),
-        .plugin(name: "LocalinterPlugin", capability: .buildTool(), dependencies: ["LocalinterExec"])
+        .plugin(name: "LocalinterPlugin", capability: .buildTool, dependencies: ["LocalinterExec"])
     ]
 )

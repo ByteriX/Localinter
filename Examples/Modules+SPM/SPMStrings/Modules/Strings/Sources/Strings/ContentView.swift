@@ -24,6 +24,8 @@ public struct ContentView: View {
 
 
         Text("Special.Untranslated")
+
+        Text("Missed.Untranslated")
     }
 }
 

@@ -4,242 +4,123 @@
 //
 
 import Foundation
-import Rswift
-import UIKit
+import RswiftResources
 
-/// This `R` struct is generated and contains references to static resources.
-struct R: Rswift.Validatable {
-  fileprivate static let applicationLocale = hostingBundle.preferredLocalizations.first.flatMap { Locale(identifier: $0) } ?? Locale.current
-  fileprivate static let hostingBundle = Bundle(for: R.Class.self)
-
-  /// Find first language and bundle for which the table exists
-  fileprivate static func localeBundle(tableName: String, preferredLanguages: [String]) -> (Foundation.Locale, Foundation.Bundle)? {
-    // Filter preferredLanguages to localizations, use first locale
-    var languages = preferredLanguages
-      .map { Locale(identifier: $0) }
-      .prefix(1)
-      .flatMap { locale -> [String] in
-        if hostingBundle.localizations.contains(locale.identifier) {
-          if let language = locale.languageCode, hostingBundle.localizations.contains(language) {
-            return [locale.identifier, language]
-          } else {
-            return [locale.identifier]
-          }
-        } else if let language = locale.languageCode, hostingBundle.localizations.contains(language) {
-          return [language]
-        } else {
-          return []
-        }
-      }
-
-    // If there's no languages, use development language as backstop
-    if languages.isEmpty {
-      if let developmentLocalization = hostingBundle.developmentLocalization {
-        languages = [developmentLocalization]
-      }
-    } else {
-      // Insert Base as second item (between locale identifier and languageCode)
-      languages.insert("Base", at: 1)
-
-      // Add development language as backstop
-      if let developmentLocalization = hostingBundle.developmentLocalization {
-        languages.append(developmentLocalization)
-      }
-    }
-
-    // Find first language for which table exists
-    // Note: key might not exist in chosen language (in that case, key will be shown)
-    for language in languages {
-      if let lproj = hostingBundle.url(forResource: language, withExtension: "lproj"),
-         let lbundle = Bundle(url: lproj)
-      {
-        let strings = lbundle.url(forResource: tableName, withExtension: "strings")
-        let stringsdict = lbundle.url(forResource: tableName, withExtension: "stringsdict")
-
-        if strings != nil || stringsdict != nil {
-          return (Locale(identifier: language), lbundle)
-        }
-      }
-    }
-
-    // If table is available in main bundle, don't look for localized resources
-    let strings = hostingBundle.url(forResource: tableName, withExtension: "strings", subdirectory: nil, localization: nil)
-    let stringsdict = hostingBundle.url(forResource: tableName, withExtension: "stringsdict", subdirectory: nil, localization: nil)
-
-    if strings != nil || stringsdict != nil {
-      return (applicationLocale, hostingBundle)
-    }
-
-    // If table is not found for requested languages, key will be shown
-    return nil
-  }
-
-  /// Load string from Info.plist file
-  fileprivate static func infoPlistString(path: [String], key: String) -> String? {
-    var dict = hostingBundle.infoDictionary
-    for step in path {
-      guard let obj = dict?[step] as? [String: Any] else { return nil }
-      dict = obj
-    }
-    return dict?[key] as? String
-  }
-
-  static func validate() throws {
-    try intern.validate()
-  }
-
-  /// This `R.color` struct is generated, and contains static references to 1 colors.
-  struct color {
-    /// Color `AccentColor`.
-    static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
-
-    #if os(iOS) || os(tvOS)
-    /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
-    @available(tvOS 11.0, *)
-    @available(iOS 11.0, *)
-    static func accentColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
-      return UIKit.UIColor(resource: R.color.accentColor, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(watchOS)
-    /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
-    @available(watchOSApplicationExtension 4.0, *)
-    static func accentColor(_: Void = ()) -> UIKit.UIColor? {
-      return UIKit.UIColor(named: R.color.accentColor.name)
-    }
-    #endif
-
-    fileprivate init() {}
-  }
-
-  /// This `R.string` struct is generated, and contains static references to 2 localization tables.
-  struct string {
-    /// This `R.string.infoPlist` struct is generated, and contains static references to 2 localization keys.
-    struct infoPlist {
-      /// en translation: Strings
-      ///
-      /// Locales: en, ru
-      static let cfBundleDisplayName = Rswift.StringResource(key: "CFBundleDisplayName", tableName: "InfoPlist", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
-      /// en translation: This app needs the camera to scan barcodes
-      ///
-      /// Locales: en, ru
-      static let nsCameraUsageDescription = Rswift.StringResource(key: "NSCameraUsageDescription", tableName: "InfoPlist", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
-
-      /// en translation: Strings
-      ///
-      /// Locales: en, ru
-      static func cfBundleDisplayName(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("CFBundleDisplayName", tableName: "InfoPlist", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "InfoPlist", preferredLanguages: preferredLanguages) else {
-          return "CFBundleDisplayName"
-        }
-
-        return NSLocalizedString("CFBundleDisplayName", tableName: "InfoPlist", bundle: bundle, comment: "")
-      }
-
-      /// en translation: This app needs the camera to scan barcodes
-      ///
-      /// Locales: en, ru
-      static func nsCameraUsageDescription(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("NSCameraUsageDescription", tableName: "InfoPlist", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "InfoPlist", preferredLanguages: preferredLanguages) else {
-          return "NSCameraUsageDescription"
-        }
-
-        return NSLocalizedString("NSCameraUsageDescription", tableName: "InfoPlist", bundle: bundle, comment: "")
-      }
-
-      fileprivate init() {}
-    }
-
-    /// This `R.string.localizable` struct is generated, and contains static references to 3 localization keys.
-    struct localizable {
-      /// en translation: %#@items@
-      ///
-      /// Locales: en, ru
-      static let helloWorlds = Rswift.StringResource(key: "Hello.worlds", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
-      /// en translation: Hello, world!
-      ///
-      /// Locales: en, ru
-      static let helloWorld = Rswift.StringResource(key: "Hello.world", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
-      /// en translation: Help me
-      ///
-      /// Locales: en, ru
-      static let helpMe = Rswift.StringResource(key: "Help.me", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
-
-      /// en translation: %#@items@
-      ///
-      /// Locales: en, ru
-      static func helloWorlds(items value1: Int, preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          let format = NSLocalizedString("Hello.worlds", bundle: hostingBundle, comment: "")
-          return String(format: format, locale: applicationLocale, value1)
-        }
-
-        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
-          return "Hello.worlds"
-        }
-
-        let format = NSLocalizedString("Hello.worlds", bundle: bundle, comment: "")
-        return String(format: format, locale: locale, value1)
-      }
-
-      /// en translation: Hello, world!
-      ///
-      /// Locales: en, ru
-      static func helloWorld(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("Hello.world", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
-          return "Hello.world"
-        }
-
-        return NSLocalizedString("Hello.world", bundle: bundle, comment: "")
-      }
-
-      /// en translation: Help me
-      ///
-      /// Locales: en, ru
-      static func helpMe(preferredLanguages: [String]? = nil) -> String {
-        guard let preferredLanguages = preferredLanguages else {
-          return NSLocalizedString("Help.me", bundle: hostingBundle, comment: "")
-        }
-
-        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
-          return "Help.me"
-        }
-
-        return NSLocalizedString("Help.me", bundle: bundle, comment: "")
-      }
-
-      fileprivate init() {}
-    }
-
-    fileprivate init() {}
-  }
-
-  fileprivate struct intern: Rswift.Validatable {
-    fileprivate static func validate() throws {
-      // There are no resources to validate
-    }
-
-    fileprivate init() {}
-  }
-
-  fileprivate class Class {}
-
-  fileprivate init() {}
-}
+private class BundleFinder {}
+let R = _R(bundle: Bundle(for: BundleFinder.self))
 
 struct _R {
-  fileprivate init() {}
+  let bundle: Foundation.Bundle
+  var string: string { .init(bundle: bundle, preferredLanguages: nil, locale: nil) }
+  var color: color { .init(bundle: bundle) }
+
+  func string(bundle: Foundation.Bundle) -> string {
+    .init(bundle: bundle, preferredLanguages: nil, locale: nil)
+  }
+  func string(locale: Foundation.Locale) -> string {
+    .init(bundle: bundle, preferredLanguages: nil, locale: locale)
+  }
+  func string(preferredLanguages: [String], locale: Locale? = nil) -> string {
+    .init(bundle: bundle, preferredLanguages: preferredLanguages, locale: locale)
+  }
+  func color(bundle: Foundation.Bundle) -> color {
+    .init(bundle: bundle)
+  }
+  func validate() throws {
+
+  }
+
+  struct project {
+    let developmentRegion = "en"
+  }
+
+  /// This `_R.string` struct is generated, and contains static references to 2 localization tables.
+  struct string {
+    let bundle: Foundation.Bundle
+    let preferredLanguages: [String]?
+    let locale: Locale?
+    var infoPlist: infoPlist { .init(source: .init(bundle: bundle, tableName: "InfoPlist", preferredLanguages: preferredLanguages, locale: locale)) }
+    var localizable: localizable { .init(source: .init(bundle: bundle, tableName: "Localizable", preferredLanguages: preferredLanguages, locale: locale)) }
+
+    func infoPlist(preferredLanguages: [String]) -> infoPlist {
+      .init(source: .init(bundle: bundle, tableName: "InfoPlist", preferredLanguages: preferredLanguages, locale: locale))
+    }
+    func localizable(preferredLanguages: [String]) -> localizable {
+      .init(source: .init(bundle: bundle, tableName: "Localizable", preferredLanguages: preferredLanguages, locale: locale))
+    }
+
+
+    /// This `_R.string.infoPlist` struct is generated, and contains static references to 2 localization keys.
+    struct infoPlist {
+      let source: RswiftResources.StringResource.Source
+
+      /// en translation: Strings
+      ///
+      /// Key: CFBundleDisplayName
+      ///
+      /// Locales: en, ru
+      var cfBundleDisplayName: RswiftResources.StringResource { .init(key: "CFBundleDisplayName", tableName: "InfoPlist", source: source, developmentValue: "Strings", comment: nil) }
+
+      /// en translation: This app needs the camera to scan barcodes
+      ///
+      /// Key: NSCameraUsageDescription
+      ///
+      /// Locales: en, ru
+      var nsCameraUsageDescription: RswiftResources.StringResource { .init(key: "NSCameraUsageDescription", tableName: "InfoPlist", source: source, developmentValue: "This app needs the camera to scan barcodes", comment: nil) }
+    }
+
+    /// This `_R.string.localizable` struct is generated, and contains static references to 3 localization keys.
+    struct localizable {
+      let source: RswiftResources.StringResource.Source
+
+      /// en translation: Hello, world!
+      ///
+      /// Key: Hello.world
+      ///
+      /// Locales: en, ru
+      var helloWorld: RswiftResources.StringResource { .init(key: "Hello.world", tableName: "Localizable", source: source, developmentValue: "Hello, world!", comment: nil) }
+
+      /// en translation: %#@items@
+      ///
+      /// Key: Hello.worlds
+      ///
+      /// Locales: en, ru
+      var helloWorlds: RswiftResources.StringResource1<Int> { .init(key: "Hello.worlds", tableName: "Localizable", source: source, developmentValue: "%#@items@", comment: nil) }
+
+      /// en translation: Help me
+      ///
+      /// Key: Help.me
+      ///
+      /// Locales: en, ru
+      var helpMe: RswiftResources.StringResource { .init(key: "Help.me", tableName: "Localizable", source: source, developmentValue: "Help me", comment: nil) }
+
+
+      /// en translation: %#@items@
+      ///
+      /// Key: Hello.worlds
+      ///
+      /// Locales: en, ru
+      func helloWorlds(items value1: Int) -> String {
+        String(format: helloWorlds, value1)
+      }
+
+      /// en translation: %#@items@
+      ///
+      /// Key: Hello.worlds
+      ///
+      /// Locales: en, ru
+      @available(*, deprecated, message: "Use R.string(preferredLanguages:).*.* instead")
+      func helloWorlds(items value1: Int, preferredLanguages: [String]) -> String {
+        String(format: helloWorlds, preferredLanguages: preferredLanguages, value1)
+      }
+    }
+  }
+
+  /// This `_R.color` struct is generated, and contains static references to 1 colors.
+  struct color {
+    let bundle: Foundation.Bundle
+
+    /// Color `AccentColor`.
+    var accentColor: RswiftResources.ColorResource { .init(name: "AccentColor", path: [], bundle: bundle) }
+  }
 }
