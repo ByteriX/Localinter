@@ -395,7 +395,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../../Localinter.swift\"\n";
+			shellScript = "#\"${SRCROOT}/../../Localinter.swift\"\n";
 		};
 		DCEA3282427102CB22EFA2DF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

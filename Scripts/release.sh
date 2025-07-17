@@ -19,6 +19,17 @@ echo "Release version $CURRENT_VERSION detected"
 APP_CONFIG_PATH="./build.config"
 echo "CURRENT_VERSION=$CURRENT_VERSION" > "$APP_CONFIG_PATH"
 
+checkExit "Start to make ImageLinter.swift script"
+
+swift Scripts/MakeLocaLinter.swift -version "$CURRENT_VERSION"
+
+checkExit "Finished MakeLocaLinter.swift script"
+
+git add "MakeLocaLinter.swift"
+git commit -m "Release $CURRENT_VERSION version with updating Swift script"
+
+checkExit "Version $CURRENT_VERSION commited"
+
 cd Examples/Modules+SPM
 checkExit "Start Tests"
 
