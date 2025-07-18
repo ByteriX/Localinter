@@ -23,9 +23,10 @@ public struct ContentView: View {
         Text("Strings.Catalog in %lld to %lld", tableName: "LocalizableCatalog", bundle: Bundle.module)
 
 
-        Text("Special.Untranslated")
+        Text("Special.Untranslated", bundle: Bundle.module)
 
-        Text("Missed.Untranslated")
+        // test comments:
+        //Text("Missed.Untranslated", bundle: Bundle.module)
     }
 }
 

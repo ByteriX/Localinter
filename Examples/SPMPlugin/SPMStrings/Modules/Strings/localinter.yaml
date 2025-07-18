@@ -20,7 +20,7 @@ ignoredUntranslatedKeys:
 sourcesExtensions:
   - swift
   - cpp
-isThrowingErrorForUntranslated: true
+isThrowingErrorForUntranslated: false
 isThrowingErrorForUnused: true
 isClearWhitespasesInLocalizableFiles: false
 isOnlyOneLanguage: false

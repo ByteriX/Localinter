@@ -7,13 +7,15 @@
 */
 
 "Hello.world" = "Привет мир!";
+
+// MARK: - Message
+// MARK: - Message
+
 //"Help.me" = "Помоги мне";
-
-// MARK: - Message
-// MARK: - Message
-
-
-
-
-
+// Potencial untranslated it's okey:
 "Help.me" = "Help me";
+
+// MARK: - Message
+// MARK: - Message
+
+//"Missed.Untranslated" = "123";

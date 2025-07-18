@@ -190,16 +190,12 @@ for file in localizableFiles {
     }
 }
 
-if settings.isThrowingErrorForUntranslated {
-    for key in untranslatedKeys {
-        printError(message: "[Missing Translation] \(key) is not translated", line: 1)
-    }
+for key in untranslatedKeys {
+    printError(message: "[Missing Translation] \(key) is not translated", line: 1, isWarning: settings.isThrowingErrorForUntranslated == false)
 }
 
-if settings.isThrowingErrorForUnused {
-    for key in unusedKeys {
-        printError(message: "[Unused cases] \(key) is not used from code", line: masterLocalizableFiles.linesNumbers[key])
-    }
+for key in unusedKeys {
+    printError(message: "[Unused cases] \(key) is not used from code", line: masterLocalizableFiles.linesNumbers[key], isWarning: settings.isThrowingErrorForUnused == false)
 }
 
 print("Number of warnings: \(warningsCount)")
