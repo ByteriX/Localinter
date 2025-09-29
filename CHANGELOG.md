@@ -3,6 +3,14 @@
 
 Any significant changes made to this project will be documented in this file.
 
+## [2.1.0] - 2025-07-20
+
+#### Added
+
+- Updating script version `LocaLinter.swift` from release script.
+- Actualization both examples for using with a Plugin and a Script.
+- For False value of isThrowingErrorForUntranslated and isThrowingErrorForUnused going to showing warning.
+
 ## [2.0.2] - 2024-04-24
 
 #### Added
