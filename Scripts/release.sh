@@ -1,6 +1,7 @@
 #!/bin/bash
 
 checkExit(){
+    echo "$1\n"
     if [ $? != 0 ]; then
         echo "Building failed: $1\n"
         exit 1
@@ -19,7 +20,7 @@ echo "Release version $CURRENT_VERSION detected"
 APP_CONFIG_PATH="./build.config"
 echo "CURRENT_VERSION=$CURRENT_VERSION" > "$APP_CONFIG_PATH"
 
-checkExit "Start to make ImageLinter.swift script"
+checkExit "Start to make LocaLinter.swift script"
 
 swift Scripts/MakeLocaLinter.swift -version "$CURRENT_VERSION"
 
