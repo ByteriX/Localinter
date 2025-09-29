@@ -25,7 +25,7 @@ swift Scripts/MakeLocaLinter.swift -version "$CURRENT_VERSION"
 
 checkExit "Finished MakeLocaLinter.swift script"
 
-git add "MakeLocaLinter.swift"
+git add "LocaLinter.swift"
 git commit -m "Release $CURRENT_VERSION version with updating Swift script"
 
 checkExit "Version $CURRENT_VERSION commited"
